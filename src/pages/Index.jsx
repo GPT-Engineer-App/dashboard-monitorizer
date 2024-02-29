@@ -5,10 +5,17 @@ import { FaPlus, FaServer } from "react-icons/fa";
 import { useEffect } from "react";
 
 const Index = () => {
-  const [hosts, setHosts] = useState(() => {
-    const savedHosts = localStorage.getItem("hosts");
-    return savedHosts ? JSON.parse(savedHosts) : [];
+  const [hosts, setHosts] = useState([]);
+  const [hostsFileContent, setHostsFileContent] = useState(() => {
+    // Simulating reading from a JSON file
+    const savedHosts = "[]"; // This would be replaced with the actual content of the JSON file
+    return JSON.parse(savedHosts);
   });
+
+  useEffect(() => {
+    // Simulating setting the initial state from the JSON file content
+    setHosts(hostsFileContent);
+  }, [hostsFileContent]);
   const [newHost, setNewHost] = useState("");
   const toast = useToast();
 
@@ -25,7 +32,8 @@ const Index = () => {
       };
       const updatedHosts = [...hosts, newHostEntry];
       setHosts(updatedHosts);
-      localStorage.setItem("hosts", JSON.stringify(updatedHosts));
+      // Simulating writing to a JSON file
+      setHostsFileContent(updatedHosts);
       setNewHost("");
       toast({
         title: "Host added",
