@@ -36,10 +36,10 @@ const Index = () => {
         <FormControl id="hostname" isRequired>
           <FormLabel>Add a new host to monitor</FormLabel>
           <Input placeholder="Enter URL or hostname" value={newHost} onChange={(e) => setNewHost(e.target.value)} />
-          <Button mt={2} leftIcon={<FaPlus />} colorScheme="teal" onClick={handleAddHost}>
-            Add Host
-          </Button>
         </FormControl>
+        <Button mt={2} leftIcon={<FaPlus />} colorScheme="teal" onClick={handleAddHost}>
+          Add Host
+        </Button>
         <SimpleGrid columns={[1, null, 3]} spacing={4}>
           {hosts.map((host, index) => (
             <Box key={index} p={5} shadow="md" borderWidth="1px" borderRadius="md" bg={host.bgColor}>
