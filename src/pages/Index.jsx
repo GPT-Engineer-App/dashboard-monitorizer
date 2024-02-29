@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { Box, Button, Container, FormControl, FormLabel, Input, SimpleGrid, Text, VStack, useToast } from "@chakra-ui/react";
 import { FaPlus, FaServer } from "react-icons/fa";
 
+import { useEffect } from "react";
+
 const Index = () => {
-  const [hosts, setHosts] = useState([]);
+  const [hosts, setHosts] = useState(() => {
+    const savedHosts = localStorage.getItem("hosts");
+    return savedHosts ? JSON.parse(savedHosts) : [];
+  });
   const [newHost, setNewHost] = useState("");
   const toast = useToast();
 
@@ -18,7 +23,9 @@ const Index = () => {
         timeUp: "100%", // In a real-world app, you'd calculate this
         bgColor: "gray.200", // Placeholder, would be replaced with a brand logo or snapshot
       };
-      setHosts([...hosts, newHostEntry]);
+      const updatedHosts = [...hosts, newHostEntry];
+      setHosts(updatedHosts);
+      localStorage.setItem("hosts", JSON.stringify(updatedHosts));
       setNewHost("");
       toast({
         title: "Host added",
